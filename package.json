@@ -1,0 +1,55 @@
+{
+  "name": "bili-black-deque",
+  "version": "0.0.1",
+  "description": "Make blacklist of bilibili a deque",
+  "main": "userscript/index.user.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack/prod.ts",
+    "dev": "webpack --config webpack/dev.ts",
+    "build:watch": "webpack --watch"
+  },
+  "keywords": [],
+  "author": "Zxilly",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "@types/prettier": "^2.7.3",
+    "@types/tampermonkey": "^5.0.0",
+    "@types/webpack": "^5.28.4",
+    "prettier": "^3.0.3",
+    "terser-webpack-plugin": "^5.3.9",
+    "ts-loader": "^9.5.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^5.10.0"
+  },
+  "userscript": {
+    "require-template": "https://cdn.jsdelivr.net/npm/${dependencyName}@${dependencyVersion}",
+    "namespace": "http://tampermonkey.net/",
+    "license": "https://opensource.org/licenses/MIT",
+    "match": [
+      "*://www.bilibili.com/*"
+    ],
+    "connect": [
+      "bilibili.com",
+      "api.bilibili.com",
+      "api.live.bilibili.com",
+      "api.vc.bilibili.com",
+      "passport.bilibili.com"
+    ],
+    "require": [],
+    "grant": [
+      "GM.xmlHttpRequest"
+    ],
+    "exclude": [],
+    "resources": [],
+    "keyedResources": {}
+  },
+  "dependencies": {
+    "@trim21/gm-fetch": "^0.1.15",
+    "axios": "^1.6.0"
+  }
+}
