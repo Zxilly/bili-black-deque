@@ -33,6 +33,7 @@
     "match": [
       "*://www.bilibili.com/*"
     ],
+    "source": "https://github.com/Zxilly/bili-black-deque",
     "name": "Bilibili Black Deque"
   },
   "dependencies": {
