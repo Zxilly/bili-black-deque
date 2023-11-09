@@ -18,8 +18,6 @@ export async function popBlack(num: number) {
     const toRemove: any[] = []
 
     for (let current_page = last_page; current_page > 0; current_page--) {
-        let params = new URLSearchParams();
-
         const resp = (await axios.get<any>('https://api.bilibili.com/x/relation/blacks', {
             params: {
                 ps: 20,
