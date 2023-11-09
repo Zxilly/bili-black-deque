@@ -33,23 +33,12 @@
     "match": [
       "*://www.bilibili.com/*"
     ],
-    "connect": [
-      "bilibili.com",
-      "api.bilibili.com",
-      "api.live.bilibili.com",
-      "api.vc.bilibili.com",
-      "passport.bilibili.com"
-    ],
     "require": [],
-    "grant": [
-      "GM.xmlHttpRequest"
-    ],
     "exclude": [],
     "resources": [],
     "keyedResources": {}
   },
   "dependencies": {
-    "@trim21/gm-fetch": "^0.1.15",
     "axios": "^1.6.0"
   }
 }
