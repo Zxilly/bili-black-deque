@@ -33,7 +33,7 @@
     "match": [
       "*://www.bilibili.com/*"
     ],
-    "name": "Bilibili Black Deque",
+    "name": "Bilibili Black Deque"
   },
   "dependencies": {
     "axios": "^1.6.0"
