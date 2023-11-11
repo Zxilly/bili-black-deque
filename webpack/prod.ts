@@ -18,10 +18,13 @@ export default merge(base, {
         minimizer: [new TerserPlugin({
             minify: TerserPlugin.swcMinify,
             terserOptions: {
-                compress: true,
+                format: {
+                    comments: true,
+                },
+                compress: false,
                 mangle: true,
             },
-            extractComments: false,
+            extractComments: true,
         })],
     },
     watchOptions: {
