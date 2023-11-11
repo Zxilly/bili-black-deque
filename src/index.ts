@@ -4,7 +4,7 @@ import {getBlackListCnt} from "./count";
 async function main() {
     let total = await getBlackListCnt();
 
-    const uin = window.prompt(`现在黑名单有 ${total}人，想移除：`)
+    const uin = window.prompt(`现在黑名单有 ${total} 人，想移除：`)
     if (uin === null) {
         alert("必须输入一个整数")
         return
