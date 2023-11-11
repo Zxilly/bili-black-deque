@@ -1,4 +1,3 @@
-import TerserPlugin from "terser-webpack-plugin";
 import { Configuration, BannerPlugin } from "webpack";
 import { generateHeader } from "../plugins/userscript.plugin";
 
@@ -19,21 +18,6 @@ const config: Configuration = {
     },
     externals: {
         axios: "axios",
-        "@trim21/gm-fetch": "GM_fetch",
-    },
-    optimization: {
-        minimize: false,
-        minimizer: [new TerserPlugin({
-            // minify: TerserPlugin.swcMinify,
-            terserOptions: {
-                format: {
-                    comments: false,
-                },
-                compress: false,
-                mangle: false,
-            },
-            extractComments: false,
-        })],
     },
     plugins: [
         new BannerPlugin({

@@ -1,7 +1,10 @@
 import { popBlack } from "./pop"
+import {getBlackListCnt} from "./count";
 
 async function main() {
-    const uin = window.prompt("想移除的黑名单数量")
+    let total = await getBlackListCnt();
+
+    const uin = window.prompt(`现在黑名单有 ${total}人，想移除：`)
     if (uin === null) {
         alert("必须输入一个整数")
         return
@@ -15,7 +18,12 @@ async function main() {
         alert("数字必须大于 0")
     }
 
-    await popBlack(deleteNum)
+    if (total < deleteNum) {
+        alert(`当前黑名单中的人数 ${total} 少于 ${deleteNum}`)
+        return
+    }
+
+    await popBlack(deleteNum, total)
 }
 
 // when press Ctrl+B invoke main

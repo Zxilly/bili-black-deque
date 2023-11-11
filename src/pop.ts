@@ -1,19 +1,10 @@
 import axios from "axios";
+import {getBlackListCnt} from "./count";
 
 
 const csrf_token = document.cookie.split('; ')!!.find(row => row.startsWith('bili_jct'))!!.split('=')[1];
 
-export async function popBlack(num: number) {
-    const result = (await axios.get<any>('https://api.bilibili.com/x/relation/blacks', {
-        withCredentials: true
-    })).data;
-    let total = result.data.total
-    if (total < num) {
-        alert(`当前黑名单中的人数 ${total} 少于 ${num}`)
-        return
-    }
-    console.log(`当前黑名单人数 ${total}`)
-
+export async function popBlack(num: number, total: number) {
     const last_page = Math.ceil(total / 50)
     const toRemove: any[] = []
 
@@ -63,14 +54,8 @@ export async function popBlack(num: number) {
     }
     console.groupEnd()
 
-    alert("处理完成")
+    let current = await getBlackListCnt();
 
-    await (async function test() {
-        const result = (await axios.get<any>('https://api.bilibili.com/x/relation/blacks', {
-            withCredentials: true
-        })).data;
-        let total = result.data.total
-        console.log(`当前黑名单人数 ${total}`)
-    })()
+    alert(`处理完成，当前黑名单有 ${current} 人`)
 }
 
