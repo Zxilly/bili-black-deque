@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name Bilibili Black Deque
-// @version 0.0.4
+// @version 0.0.5
 // @namespace http://tampermonkey.net/
 // @description Make blacklist of bilibili a deque
 // @author Zxilly
