@@ -1,6 +1,4 @@
 import axios from "axios";
-import {getBlackListCnt} from "./count";
-
 
 const csrf_token = document.cookie.split('; ')!!.find(row => row.startsWith('bili_jct'))!!.split('=')[1];
 
