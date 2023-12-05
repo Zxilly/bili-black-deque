@@ -30,17 +30,35 @@ async function manualRemove() {
     alert(`处理完成，当前黑名单有 ${current} 人`)
 }
 
-// when press Ctrl+B invoke main
-document.addEventListener("keydown", async (ev) => {
-    if (ev.ctrlKey && ev.key === "b") {
-        await manualRemove()
+async function configureAndSet() {
+    let total = await getBlackListCnt()
+
+    const uin = window.prompt(`当前黑名单有 ${total} 人，想保持在：`);
+    if (uin === null) {
+        alert("必须输入一个整数")
+        return
     }
-})
 
-const KEEP_TARGET = "keep-target";
-const LAST_TASK_DATE = "last-task-date";
+    const target = Number.parseInt(uin)
+    if (Number.isNaN(target)) {
+        alert(`${uin} 不能被解释为合法整数`)
+        return
+    }
+    if (target <= 0) {
+        alert("数字必须大于 0")
+    }
 
-(async () => {
+    if (target > total) {
+        console.warn(`当前黑名单中的人数 ${total} 少于 ${target}`)
+    }
+
+    localStorage.setItem(KEEP_TARGET, target.toString())
+    localStorage.removeItem(LAST_TASK_DATE)
+
+    await task()
+}
+
+async function task() {
     const keepTarget = localStorage.getItem(KEEP_TARGET);
     if (keepTarget === null) {
         return;
@@ -58,7 +76,29 @@ const LAST_TASK_DATE = "last-task-date";
         return;
     }
 
-    await popBlack(target, await getBlackListCnt());
+    let total = await getBlackListCnt();
+
+    if (total > target) {
+        await popBlack(total - target, total);
+    }
 
     localStorage.setItem(LAST_TASK_DATE, today);
-})();
+}
+
+// when press Ctrl+B invoke main
+document.addEventListener("keydown", async (ev) => {
+    if (ev.altKey && ev.key === "b") {
+        await manualRemove()
+    }
+
+    if (ev.altKey && ev.key === "c") {
+        await configureAndSet()
+    }
+})
+
+const KEEP_TARGET = "keep-target";
+const LAST_TASK_DATE = "last-task-date";
+
+(async () => {
+    await task()
+})()
