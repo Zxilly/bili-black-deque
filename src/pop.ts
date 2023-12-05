@@ -47,15 +47,18 @@ export async function popBlack(num: number, total: number) {
         params.append("act", "6")
         params.append("re_src", "116")
 
-        const resp = (await axios.post<any>("https://api.bilibili.com/x/relation/modify", params, {
-            withCredentials: true
-        })).data
-        console.debug(JSON.stringify(resp))
+        let retries = 3;
+        while (retries > 0) {
+            const resp = (await axios.post<any>("https://api.bilibili.com/x/relation/modify", params, {
+                withCredentials: true
+            })).data
+            console.debug(JSON.stringify(resp))
+            if (resp.code === 0) {
+                break;
+            }
+            retries--;
+        }
     }
     console.groupEnd()
-
-    let current = await getBlackListCnt();
-
-    alert(`处理完成，当前黑名单有 ${current} 人`)
 }
 
