@@ -14,18 +14,7 @@ export default merge(base, {
         filename: "index.prod.user.js",
     },
     optimization: {
-        minimize: true,
-        minimizer: [new TerserPlugin({
-            minify: TerserPlugin.swcMinify,
-            terserOptions: {
-                format: {
-                    comments: true,
-                },
-                compress: false,
-                mangle: true,
-            },
-            extractComments: true,
-        })],
+        minimize: false,
     },
     watchOptions: {
         ignored: /node_modules/,
