@@ -1,6 +1,6 @@
 {
   "name": "bili-black-deque",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Make blacklist of bilibili a deque",
   "main": "userscript/index.user.js",
   "scripts": {
