@@ -1,5 +1,4 @@
 import axios from "axios";
-import { time } from "console";
 
 const csrf_token = document.cookie.split('; ')!!.find(row => row.startsWith('bili_jct'))!!.split('=')[1];
 
