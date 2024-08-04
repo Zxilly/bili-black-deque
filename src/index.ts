@@ -100,5 +100,8 @@ const KEEP_TARGET = "keep-target";
 const LAST_TASK_DATE = "last-task-date";
 
 (async () => {
+    console.info("alt + b to run");
+    console.info("alt + c to set target");
+
     await task()
 })()

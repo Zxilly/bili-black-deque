@@ -1,20 +1,20 @@
 // ==UserScript==
 // @name Bilibili Black Deque
-// @version 0.0.5
+// @version 0.0.6
 // @namespace http://tampermonkey.net/
 // @description Make blacklist of bilibili a deque
 // @author Zxilly
 // @source https://github.com/Zxilly/bili-black-deque
 // @license https://opensource.org/licenses/MIT
 // @match *://www.bilibili.com/*
-// @require https://cdn.jsdelivr.net/npm/axios@1.6.2
+// @require https://cdn.jsdelivr.net/npm/axios@1.7.3
 // ==/UserScript==
 
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 397:
+/***/ 242:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -31,8 +31,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getBlackListCnt = void 0;
-const axios_1 = __importDefault(__webpack_require__(467));
+exports.getBlackListCnt = getBlackListCnt;
+const axios_1 = __importDefault(__webpack_require__(719));
 function getBlackListCnt() {
     return __awaiter(this, void 0, void 0, function* () {
         const result = (yield axios_1.default.get('https://api.bilibili.com/x/relation/blacks', {
@@ -41,12 +41,11 @@ function getBlackListCnt() {
         return result.data.total;
     });
 }
-exports.getBlackListCnt = getBlackListCnt;
 
 
 /***/ }),
 
-/***/ 213:
+/***/ 449:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -60,8 +59,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const pop_1 = __webpack_require__(285);
-const count_1 = __webpack_require__(397);
+const pop_1 = __webpack_require__(74);
+const count_1 = __webpack_require__(242);
 function manualRemove() {
     return __awaiter(this, void 0, void 0, function* () {
         let total = yield (0, count_1.getBlackListCnt)();
@@ -145,13 +144,15 @@ document.addEventListener("keydown", (ev) => __awaiter(void 0, void 0, void 0, f
 const KEEP_TARGET = "keep-target";
 const LAST_TASK_DATE = "last-task-date";
 (() => __awaiter(void 0, void 0, void 0, function* () {
+    console.info("alt + b to run");
+    console.info("alt + c to set target");
     yield task();
 }))();
 
 
 /***/ }),
 
-/***/ 285:
+/***/ 74:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -168,8 +169,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.popBlack = void 0;
-const axios_1 = __importDefault(__webpack_require__(467));
+exports.popBlack = popBlack;
+const axios_1 = __importDefault(__webpack_require__(719));
 const csrf_token = document.cookie.split('; ').find(row => row.startsWith('bili_jct')).split('=')[1];
 function popBlack(num, total) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -215,17 +216,18 @@ function popBlack(num, total) {
                     break;
                 }
                 retries--;
+                console.log("限流中，等待2秒");
+                yield new Promise(r => setTimeout(r, 2000));
             }
         }
         console.groupEnd();
     });
 }
-exports.popBlack = popBlack;
 
 
 /***/ }),
 
-/***/ 467:
+/***/ 719:
 /***/ ((module) => {
 
 module.exports = axios;
@@ -263,7 +265,7 @@ module.exports = axios;
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__(213);
+/******/ 	var __webpack_exports__ = __webpack_require__(449);
 /******/ 	
 /******/ })()
 ;
